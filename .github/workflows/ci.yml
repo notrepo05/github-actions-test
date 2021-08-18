@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  unit-tests:
+    container:
+      image: pivotalcfreleng/golang
+
+    timeout-minutes: 90
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        product: ["vsphere", "aws"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - id: run
+        name: run it
+        run: .github/tasks/test.sh
