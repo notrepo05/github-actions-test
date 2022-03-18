@@ -8,11 +8,11 @@ on:
         required: true
         type: boolean
       publish-ist:
-        description: 'Publish TAS'
+        description: 'Publish IST'
         required: true
         type: boolean
       publish-tasw:
-        description: 'Publish TAS'
+        description: 'Publish TASW'
         required: true
         type: boolean
 
@@ -49,6 +49,7 @@ jobs:
 
 
   unit-tests:
+    needs: [detect]
     container:
       image: pivotalcfreleng/golang
 
