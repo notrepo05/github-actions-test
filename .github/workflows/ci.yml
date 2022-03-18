@@ -3,16 +3,19 @@ name: CI
 on:
   workflow_dispatch:
     inputs:
-      product:
-        description: 'Select product'
+      publish-tas:
+        description: 'Publish TAS'
         required: true
-        default: 'all'
-        type: choice
-        options:
-          - all
-          - tas
-          - ist
-          - tasw
+        type: boolean
+      publish-ist:
+        description: 'Publish TAS'
+        required: true
+        type: boolean
+      publish-tasw:
+        description: 'Publish TAS'
+        required: true
+        type: boolean
+
       step:
         description: 'Select step'
         required: true
@@ -24,6 +27,27 @@ on:
           - upload
           - publish
 jobs:
+  detect:
+    timeout-minutes: 90
+    runs-on: [ self-hosted, deployer ]
+    defaults:
+      run:
+        shell: bash
+    outputs:
+      products: ${{ steps.detect.outputs.products }}
+      step: ${{ steps.detect.outputs.step }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: detect
+        name: compute selections
+        run: .github/tasks/test.sh
+        env:
+          PUBLISH_TAS: ${{ github.event.inputs.publish-tas }}
+          PUBLISH_IST: ${{ github.event.inputs.publish-ist }}
+          PUBLISH_TASW: ${{ github.event.inputs.publish-tasw }}
+          STEP: ${{ github.event.inputs.step }}
+
+
   unit-tests:
     container:
       image: pivotalcfreleng/golang
@@ -35,7 +59,7 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        product: ["vsphere", "aws"]
+        product: ${{ fromJson(needs.detect.outputs.products) }}
 
     steps:
       - uses: actions/checkout@v2
