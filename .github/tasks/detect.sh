@@ -3,8 +3,6 @@
 set -eux
 
 function main() {
-  echo "${STEP}"
-
   local scenarios
   scenarios='[]'
   local supported_scenarios
@@ -19,16 +17,12 @@ function main() {
     supported_scenarios+=" tasw"
   fi
 
-  echo "supported_scenarios"
-  for scenario in $supported_scenarios; do
-    senarios=$(echo $scenarios | jq -arg key1 $senario '. += [$key1]')
-  done
-  echo $scenarios
 
-  echo "tas: ${PUBLISH_TAS}"
-  echo "ist: ${PUBLISH_IST}"
-  echo "tasw: ${PUBLISH_TASW}"
-  echo "hello world"
+
+  for scenario in $supported_scenarios; do
+    scenarios=$(echo $scenarios | jq --arg key1 $scenario -c '. += [$key1]')
+  done
+
   echo "::set-output name=products::$(jq -c "." <<< "${scenarios}")"
   echo "::set-output name=step::${STEP}"
 }
