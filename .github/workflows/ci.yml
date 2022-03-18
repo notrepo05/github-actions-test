@@ -1,10 +1,28 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-
+  workflow_dispatch:
+    inputs:
+      product:
+        description: 'Select product'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - tas
+          - ist
+          - tasw
+      step:
+        description: 'Select step'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - build
+          - upload
+          - publish
 jobs:
   unit-tests:
     container:
@@ -24,3 +42,6 @@ jobs:
       - id: run
         name: run it
         run: .github/tasks/test.sh
+        env:
+          PRODUCT: github.event.inputs.product
+          STEP: github.event.inputs.step
