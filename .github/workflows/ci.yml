@@ -23,9 +23,9 @@ on:
         type: choice
         options:
           - all
-          - build
           - upload
           - publish
+          - release-notes
 jobs:
   detect:
     timeout-minutes: 90
