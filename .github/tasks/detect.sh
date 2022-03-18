@@ -17,8 +17,6 @@ function main() {
     supported_scenarios+=" tasw"
   fi
 
-
-
   for scenario in $supported_scenarios; do
     scenarios=$(echo $scenarios | jq --arg key1 $scenario -c '. += [$key1]')
   done

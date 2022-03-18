@@ -48,7 +48,8 @@ jobs:
           STEP: ${{ github.event.inputs.step }}
 
 
-  unit-tests:
+  publish:
+    if: ${{ needs.detect.outputs.step == 'publish' }}
     needs: [detect]
     container:
       image: pivotalcfreleng/golang
