@@ -29,7 +29,7 @@ on:
 jobs:
   detect:
     timeout-minutes: 90
-    runs-on: [ self-hosted, deployer ]
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
