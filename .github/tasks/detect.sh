@@ -19,9 +19,11 @@ function main() {
     supported_scenarios+=" tasw"
   fi
 
+  echo "supported_scenarios"
   for scenario in $supported_scenarios; do
     senarios=$(jq --arg scenario "${scenario}" '. += [$scenario]' <<< "${scenarios}")
   done
+  echo $scenarios
 
   echo "tas: ${PUBLISH_TAS}"
   echo "ist: ${PUBLISH_IST}"
