@@ -49,7 +49,7 @@ jobs:
 
 
   publish:
-    if: ${{ needs.detect.outputs.step == 'publish' }}
+    if: ${{ needs.detect.outputs.step == 'publish' || needs.detect.outputs.step == 'all' }}
     needs: [detect]
     container:
       image: pivotalcfreleng/golang
