@@ -21,7 +21,7 @@ function main() {
 
   echo "supported_scenarios"
   for scenario in $supported_scenarios; do
-    senarios=$(jq --arg scenarios "${scenarios}" '. += [$scenarios]' <<< "${scenario}")
+    senarios=$(jq --arg scenario "${scenarios}" '. += [$scenario]' <<< "${scenario}")
   done
   echo $scenarios
 
