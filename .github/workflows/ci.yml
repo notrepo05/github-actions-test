@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v2
       - id: detect
         name: compute selections
-        run: .github/tasks/test.sh
+        run: .github/tasks/detect.sh
         env:
           PUBLISH_TAS: ${{ github.event.inputs.publish-tas }}
           PUBLISH_IST: ${{ github.event.inputs.publish-ist }}
