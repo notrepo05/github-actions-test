@@ -43,5 +43,5 @@ jobs:
         name: run it
         run: .github/tasks/test.sh
         env:
-          PRODUCT: github.event.inputs.product
-          STEP: github.event.inputs.step
+          PRODUCT: ${{ github.event.inputs.product }}
+          STEP: ${{ github.event.inputs.step }}
