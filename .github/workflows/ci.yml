@@ -68,7 +68,7 @@ jobs:
         env:
           UPLOADED: true
         run: |
-          if [ "${UPLOADED}" == "true" ]; then
+          if [[ "${UPLOADED}" == "true" ]]; then
               echo "Tile is uploaded to Tanzunet."
           else
               echo "Tile is not uploaded to Tanzunet yet. Run the 'Build-Upload-Publish_Release_Notes' first."
