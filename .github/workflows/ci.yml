@@ -64,6 +64,17 @@ jobs:
         product: ${{ fromJson(needs.detect.outputs.products) }}
 
     steps:
+      - id: test-inline-bash
+        env:
+          UPLOADED: true
+        run: |
+          if [ "${UPLOADED}" == "true" ]; then
+              echo "Tile is uploaded to Tanzunet."
+          else
+              echo "Tile is not uploaded to Tanzunet yet. Run the 'Build-Upload-Publish_Release_Notes' first."
+              exit 1
+          fi
+
       - uses: actions/checkout@v2
       - id: run
         name: run it
