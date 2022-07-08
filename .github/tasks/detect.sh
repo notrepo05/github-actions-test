@@ -21,6 +21,8 @@ function main() {
     scenarios=$(echo $scenarios | jq --arg key1 $scenario -c '. += [$key1]')
   done
 
+  sleep 60
+
   echo "::set-output name=products::$(jq -c "." <<< "${scenarios}")"
   echo "::set-output name=step::${STEP}"
 }
