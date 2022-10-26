@@ -1,6 +1,9 @@
 name: CI
 concurrency: hello
 on:
+  tags:
+    - RT-**-run.*/4.0
+
   pull_request:
     paths:
       - '*'
