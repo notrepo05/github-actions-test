@@ -1,5 +1,4 @@
 name: CI
-concurrency: hello
 on:
   pull_request:
     paths:
